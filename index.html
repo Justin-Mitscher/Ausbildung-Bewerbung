@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Justin - Ausbildung als Fachinformatiker</title>
+    <style>
+        /* CSS Variablen für den einfachen Farbwechsel (Dark Mode) */
+        :root {
+            --bg-color: #551A57; /* Das edle Dunkellila vom Flyer */
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --heading-color: #551A57;
+            --sub-text: #666666;
+            --shadow: rgba(0, 0, 0, 0.25);
+        }
+
+        /* Wenn die Klasse .dark-mode aktiv ist, ändern sich die Farben */
+        .dark-mode {
+            --bg-color: #121212; /* Typisches Entwickler-Dunkelgrau */
+            --card-bg: #1e1e1e;
+            --text-color: #e0e0e0;
+            --heading-color: #bb86fc; /* Modernes Neon-Lila für Dark Mode */
+            --sub-text: #aaaaaa;
+            --shadow: rgba(0, 0, 0, 0.5);
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 750px;
+            width: 100%;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px var(--shadow);
+            position: relative;
+            transition: background-color 0.3s;
+        }
+
+        /* Dark Mode Button oben rechts */
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--heading-color);
+            color: var(--card-bg);
+            border: none;
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.85rem;
+            transition: transform 0.2s, background-color 0.3s;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+        }
+
+        h1 {
+            color: var(--heading-color);
+            font-size: 2.2rem;
+            margin-top: 0;
+            margin-bottom: 5px;
+            border-bottom: 3px solid var(--heading-color);
+            padding-bottom: 10px;
+            transition: color 0.3s, border-color 0.3s;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--sub-text);
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        h2 {
+            color: var(--heading-color);
+            font-size: 1.4rem;
+            margin-top: 30px;
+            margin-bottom: 12px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .skills-list {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 30px;
+        }
+
+        .skills-list li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 12px;
+        }
+
+        .skills-list li::before {
+            content: "■";
+            position: absolute;
+            left: 0;
+            color: var(--heading-color);
+            font-size: 12px;
+            top: 2px;
+        }
+
+        .github-btn {
+            display: inline-flex;
+            align-items: center;
+            background-color: #24292e;
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: bold;
+            margin-top: 10px;
+            margin-bottom: 25px;
+            transition: background-color 0.2s, transform 0.2s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .github-btn:hover {
+            background-color: #444;
+            transform: translateY(-2px);
+        }
+
+        /* JavaScript Quiz Box Design */
+        .quiz-box {
+            background: rgba(85, 26, 87, 0.05);
+            border-left: 4px solid var(--heading-color);
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin-top: 20px;
+        }
+
+        .quiz-options {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .quiz-btn {
+            background: var(--card-bg);
+            border: 2px solid var(--heading-color);
+            color: var(--text-color);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .quiz-btn:hover {
+            background: var(--heading-color);
+            color: white;
+        }
+
+        #quiz-result {
+            margin-top: 12px;
+            font-weight: bold;
+        }
+
+        .contact-box {
+            background: linear-gradient(135deg, #551A57, #7B287E);
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 40px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(85, 26, 87, 0.3);
+        }
+
+        .contact-box h3 {
+            margin-top: 0;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .contact-details {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+            font-size: 1.1rem;
+        }
+
+        .contact-item {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 8px 15px;
+            border-radius: 5px;
+        }
+
+        .contact-item a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .container { padding: 20px; }
+            .contact-details { flex-direction: column; gap: 10px; }
+            .quiz-options { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <button class="theme-toggle" onclick="toggleTheme()">🌓 Theme wechseln</button>
+
+    <h1>Hi, ich heiße Justin</h1>
+    <div class="subtitle">Ausbildung als Fachinformatiker (Anwendungsentwicklung / Systemintegration)</div>
+
+    <h2>Wie ich meine Leidenschaft fand:</h2>
+    <p>Seit meiner Kindheit schon habe ich viel Zeit am PC verbracht und auch gerne herumgetüftelt, was heißen soll, den PC von Grund auf aufgebaut. Je älter ich wurde, habe ich auch bei Freunden und Familie bei technischen Problemen geholfen. Unter anderem habe ich mir vor ca. 5 Jahren selber HTML, CSS und JavaScript beigebracht, so wurde mir klar, dass ich Fachinformatiker werden möchte.</p>
+
+    <h2>Mein Code &amp; Portfolio:</h2>
+    <p>Auf GitHub lade ich regelmäßig meine aktuellen Projekte, Skripte und Übungen hoch. Schauen Sie sich gerne direkt meinen Quellcode an:</p>
+    
+    <a href="https://github.com/Justin-Mitscher" target="_blank" class="github-btn">
+        💻 Mein Code live auf GitHub ansehen
+    </a>
+
+    <h2>Programmiersprachen &amp; Skills:</h2>
+    <ul class="skills-list">
+        <li><strong>HTML5 &amp; CSS3:</strong> Modernes, responsives Design (inklusive dieser Seite)</li>
+        <li><strong>JavaScript:</strong> DOM-Manipulation und Event-Listener (siehe Live-Funktionen hier)</li>
+        <li><strong>Python (Selbststudium):</strong> Kontinuierliches Lernen via <strong>freeCodeCamp</strong></li>
+        <li><strong>Praktisches Englisch:</strong> Nutzen von englischen IT-Tutorials und Dokumentationen</li>
+    </ul>
+
+    <div class="quiz-box">
+        <strong>⚡ Kleiner Code-Check (Mein JavaScript-Test):</strong>
+        <p style="margin: 5px 0 10px 0;">Was gibt der Python-Befehl print(2 * 3) aus?</p>
+        <div class="quiz-options">
+            <button class="quiz-btn" onclick="checkAnswer('5')">5</button>
+            <button class="quiz-btn" onclick="checkAnswer('6')">6</button>
+            <button class="quiz-btn" onclick="checkAnswer('23')">23</button>
+        </div>
+        <div id="quiz-result"></div>
+    </div>
+
+    <h2>Perspektive &amp; Motivation:</h2>
+    <p>Der Arbeitsalltag eines Fachinformatikers fasziniert mich durch seine planungs- und lösungsorientierte Art. Grundlegendes mathematisches und logisches Verständnis ist essenziell für die Programmierlogik – eine Eigenschaft, die ich mitbringe und durch eine hohe Lernbereitschaft in Ihrem Betrieb erweitern möchte.</p>
+
+    <div class="contact-box">
+        <h3>Lassen Sie uns Kontakt aufnehmen!</h3>
+        <p>Ich freue mich auf die Einladung zu einem Praktikum oder einem persönlichen Gespräch.</p>
+        <div class="contact-details">
+            <div class="contact-item">📞 015562 019036</div>
+            <div class="contact-item">✉️ <a href="mailto:Justinmitscher03@gmail.com">Justinmitscher03@gmail.com</a></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Funktion für den Dark Mode (CSS-Klasse umschalten)
+    function toggleTheme() {
+        document.body.classList.toggle('dark-mode');
+    }
+
+    // Funktion für das interaktive Quiz
+    function checkAnswer(answer) {
+        const resultDiv = document.getElementById('quiz-result');
+        if (answer === '6') {
+            resultDiv.style.color = '#2ecc71'; // Grün für richtig
+            resultDiv.innerHTML = '🎉 Richtig! Logik sitzt.';
+        } else {
+            resultDiv.style.color = '#e74c3c'; // Rot für falsch
+            resultDiv.innerHTML = '❌ Knapp daneben! Versuch es nochmal.';
+        }
+    }
+</script>
+
+</body>
+</html>
